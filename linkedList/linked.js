@@ -40,7 +40,7 @@ function remove(node){
 	var willDelete = this.find(node);
 	prev.next = willDelete.next;
 	
-	function prevNode(node){
+	function prevNode(node){ 
 		var currNode = self.head;
 		while(currNode.next.element != node){
 			currNode = currNode.next;
