@@ -30,11 +30,11 @@ function HashTable(){
 function put(data){
   var address = this.simpleHash(data);
   var find = false;
-  console.log(address,data);
+
   if(this.table[address][0] == undefined){
     this.table[address][0] = data;
   }else{
-    for(var j = 1 ; j< this.table[address].length ; j++){
+    for(var j = 1 ; j< this.table[address].length + 1 ; j++){
       if(this.table[address][j] == undefined){
         this.table[address][j] = data;
         break;
