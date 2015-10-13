@@ -33,22 +33,6 @@ function display(){
 };
 
 function remove(node){
-<<<<<<< HEAD
-	var self = this;
-	
-	var prev = prevNode(node);
-
-	var willDelete = this.find(node);
-	prev.next = willDelete.next;
-	
-	function prevNode(node){ 
-		var currNode = self.head;
-		while(currNode.next.element != node){
-			currNode = currNode.next;
-		}
-		return currNode;
-	}
-=======
     var self = this;
     
     var prev = prevNode(node);
@@ -63,7 +47,6 @@ function remove(node){
         }
         return currNode;
     }
->>>>>>> 244e045db6c6dc8719f6138fa330025d3c21fa9f
 
 };
 
