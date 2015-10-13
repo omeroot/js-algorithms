@@ -9,11 +9,18 @@
 * ------ ------------------------------- ------------- ------------------------
 * Durr  | (68 + 117 + 114 + 114)        |   413       | hash array[413] = Durr
 * Smith | (83 + 109 + 105 + 116 + 104)  |   517       | hash array[517] = Smith
+*
+*
+*
+* necessary due to the use of modular arithmatic in computing the key
+* hash table size greater than 100 for evenly disperse the keys in hash table
+* method for detect collision and resolve,it is seperate chaining
+* Name  | Hash Function                 | Hash Value  | Hash Table
+* ------ ------------------------------- ------------- ------------------------
+* Durr  | (68 + 117 + 114 + 114)        |   413       | hash array[413] = [Durr,Durr]
+* Smith | (83 + 109 + 105 + 116 + 104)  |   517       | hash array[517] = [Smith]
 */
 
-
-//necessary due to the use of modular arithmatic in computing the key
-//hash table size greater than 100 for evenly disperse the keys in hash table
 var HASH_TABLE_SIZE = 137;
 
 function HashTable(){
