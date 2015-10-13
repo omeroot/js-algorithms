@@ -1,3 +1,3 @@
 # js-algorithms
 
-- [Linked List]()
+- [Linked List](https://github.com/omeroot/js-algorithms/tree/master/linkedList)
