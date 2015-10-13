@@ -3,3 +3,5 @@ function Node(element){
 	this.next = null;
 	this.next = null;
 }
+
+module.exports = Node;
