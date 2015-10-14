@@ -60,7 +60,6 @@ function showDistro(){
   for(var i = 0 ; i< HASH_TABLE_SIZE ; i++){
     var val = this.table[i];
     if(val.length != 0){
-      console.log(val);
       process.stdout.write(i.toString());
       for(var j = 0 ; j< 11-i.toString().length ; j++){
         process.stdout.write(" ");
