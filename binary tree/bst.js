@@ -1,25 +1,25 @@
 /*
-*   a tree is nonlinear data structure
-*   trees are used to stroe hierarchical data(such as filesystem)
-*   you can search a binary tree very quickly
-*
-*                    ____
-*      ROOT ------> |____|
-*                     /\
-*                    /  \
-*                   __  __
-*    CHILD ------> |__||__|
-*                   /
-*                  /  
-*                 __
-*                |__|
-*        
-*   INSERT
-*   if value of new node is greater than its parent node,add it right branch else add it left brancsh
-*
-*
+ *   a tree is nonlinear data structure
+ *   trees are used to stroe hierarchical data(such as filesystem)
+ *   you can search a binary tree very quickly
+ *
+ *                    ____
+ *      ROOT ------> |____|
+ *                     /\
+ *                    /  \
+ *                   __  __
+ *    CHILD ------> |__||__|
+ *                   /
+ *                  /
+ *                 __
+ *                |__|
+ *
+ *   INSERT
+ *   if value of new node is greater than its parent node,add it right branch else add it left brancsh
+ *
+ *
 
-**/                 
+ **/
 
 var Node = require('./node.js');
 
@@ -33,43 +33,44 @@ function BST() {
   this.getMax = getMax;
   this.find = find;
   this.remove = remove;
+  this.removeNode = removeNode;
 }
 
 function insert(data) {
-  var node = new Node(data,null,null);
-  if (this.root == null){
+  var node = new Node(data, null, null);
+  if (this.root == null) {
     this.root = node;
   } else {
     var curr = this.root;
-    
-    while (true){
-      if (curr.data > node.data){
-        if(curr.left == null){
+
+    while (true) {
+      if (curr.data > node.data) {
+        if (curr.left == null) {
           curr.left = node;
           break;
-        }else{
+        } else {
           curr = curr.left;
           continue;
         }
-      }else {
-        if(curr.right == null){
+      } else {
+        if (curr.right == null) {
           curr.right = node;
           break;
-        } else{
+        } else {
           curr = curr.right;
           continue;
         }
       }
     }
   }
-  console.log("inserted ",data);
+  console.log("inserted ", data);
 }
 
-function getMin(){
+function getMin() {
   var curr = this.root;
   var min = curr.data;
 
-  while(!(curr == null)){
+  while (!(curr == null)) {
     min = curr.data;
     curr = curr.left;
   }
@@ -77,10 +78,10 @@ function getMin(){
   return min;
 }
 
-function getMax(){
+function getMax() {
   var curr = this.root;
   var max;
-  while(!(curr == null)){
+  while (!(curr == null)) {
     max = curr.data;
     curr = curr.right;
   }
@@ -88,62 +89,96 @@ function getMax(){
   return max;
 }
 
-function find(item){
+function find(item) {
   var curr = this.root;
   var parent;
-  while (curr.data != item){
+  while (curr.data != item) {
     parent = curr;
-    if (curr.data > item){
+    if (curr.data > item) {
       curr = curr.left;
-    } else{
+    } else {
       curr = curr.right;
     }
-    if (curr == null){
+    if (curr == null) {
       return null;
     }
   }
-  return {parent : parent, current: curr};
+  return {parent: parent, current: curr};
 }
 
 /*
-*
-*
-*
-*
-**/
-function remove(item){
-  var curr = this.root;
-  var willDelete = this.find(item);
-
-  if(willDelete.current.left == null && willDelete.current.right == null){
-    if(willDelete.parent.left.data == item){
-      willDelete.parent.left = null;
-    } else{
-      willDelete.parent.right = null;
-    }
-  } else{
-    
-  }
+ *
+ *
+ *
+ *
+ **/
+function remove(data) {
+  var root = this.removeNode(this.root, data);
 }
 
-function inOrder(node){
-  if(!(node == null)){
+function removeNode(node, data) {
+  if (node == null) {
+    return null;
+  }
+  if (node.data == data) {
+    if (node.left == null && node.right == null) {
+      return null;
+    }
+
+    //node has no left child
+    if (node.left == null) {
+      return node.right;
+    }
+
+    //node has no right child
+    if (node.right == null) {
+      return node.left;
+    }
+
+    //node has two child
+    var tempNode = getSmallest(node.right);
+    node.data = tempNode.data;
+    node.right = removeNode(node.right, tempNode.data);
+
+    return node;
+  } else if (data < node.data) {
+    node.left = removeNode(node.left, data);
+
+    return node;
+  } else if (data > node.data) {
+    removeNode(node.right, data);
+
+    return node;
+  }
+
+  function getSmallest(n) {
+    if (n.left == null) {
+      return n;
+    } else {
+      getSmallest(n.left);
+    }
+  }
+
+}
+
+function inOrder(node) {
+  if (!(node == null)) {
     inOrder(node.left);
     process.stdout.write(node.get() + " ");
     inOrder(node.right);
   }
 }
 
-function preOrder(node){
-  if(!(node == null)){
+function preOrder(node) {
+  if (!(node == null)) {
     process.stdout.write(node.get() + " ");
     preOrder(node.left);
     preOrder(node.right);
   }
 }
 
-function postOrder(node){
-  if(!(node == null)){
+function postOrder(node) {
+  if (!(node == null)) {
     postOrder(node.left);
     postOrder(node.right);
     process.stdout.write(node.get() + " ");
@@ -169,12 +204,12 @@ process.stdout.write("\n");
 bst.postOrder(bst.root);
 process.stdout.write("\n");
 
-console.log("min ",bst.getMin());
-console.log("max ",bst.getMax());
+console.log("min ", bst.getMin());
+console.log("max ", bst.getMax());
 
 console.log("find", bst.find(37).parent);
 
-bst.remove(37);
+bst.remove(45);
 bst.inOrder(bst.root);
 process.stdout.write("\n");
 
