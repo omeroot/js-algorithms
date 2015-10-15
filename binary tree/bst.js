@@ -108,8 +108,7 @@ function find(item) {
 
 /*
  *
- *
- *
+ *  getSmallest is greatest node on right side of it will delete node
  *
  **/
 function remove(data) {
