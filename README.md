@@ -5,4 +5,4 @@
 - [Hash](https://github.com/omeroot/js-algorithms/tree/master/hashing)
 - [Sets](https://github.com/omeroot/js-algorithms/tree/master/sets)
 - [Binary Tree](https://github.com/omeroot/js-algorithms/tree/master/binary%20tree)
-- [Graphs](https://github.com/omeroot/js-algorithms/tree/master/graphs)
+- [Directed Graphs](https://github.com/omeroot/js-algorithms/tree/master/graphs)
