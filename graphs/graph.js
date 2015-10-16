@@ -29,7 +29,7 @@ function Graph(v) {
   this.pathTo = pathTo;
 }
 
-function addEdge(v1, v2) {
+function addEdge(v1, v2, cost) {
   //var edge = new Edge();
 
   if (!this.adj.hasOwnProperty(v1)) {
@@ -41,8 +41,14 @@ function addEdge(v1, v2) {
     this.visited[v2] = false;
   }
 
-  this.adj[v1].push(v2);
-  this.adj[v2].push(v1);
+  this.adj[v1].push({
+    to: v2,
+    cost: cost
+  });
+  this.adj[v2].push({
+    to: v1,
+    cost: cost
+  });
   this.edges++;
 }
 
@@ -50,7 +56,7 @@ function showGraph() {
   for (var key in this.adj) {
     process.stdout.write(key + "--> ");
     for (var i = 0; i < this.adj[key].length; i++) {
-      process.stdout.write(this.adj[key][i] + " ");
+      process.stdout.write(this.adj[key][i].to + " ");
     }
     process.stdout.write("\n");
   }
@@ -67,8 +73,8 @@ function dfs(v) {
     console.log("visited ", v);
   }
   for (var i = 0; i < this.adj[v].length; i++) {
-    if (this.visited[this.adj[v][i]] == false) {
-      this.dfs(this.adj[v][i]);
+    if (this.visited[this.adj[v][i].to] == false) {
+      this.dfs(this.adj[v][i].to);
     }
   }
 }
@@ -103,34 +109,33 @@ function bfs(v) {
       this.visited[s] = true;
     }
     for (var i = 0; i < this.adj[s].length; i++) {
-      if (!this.visited[this.adj[s][i]]) {
-        queue.push(this.adj[s][i]);
-        this.edgeTo[this.adj[s][i]] = s;
+      if (!this.visited[this.adj[s][i].to]) {
+        queue.push(this.adj[s][i].to);
+        this.edgeTo[this.adj[s][i].to] = s;
       }
     }
   }
 }
 
 var g = new Graph(7);
-g.addEdge("a", "b");
-g.addEdge("a", "c");
-g.addEdge("b", "d");
-g.addEdge("c", "e");
-g.addEdge("a", "f");
-g.addEdge("b", "e");
-g.addEdge("e", "g");
+g.addEdge("a", "b",3);
+g.addEdge("a", "c",4);
+g.addEdge("b", "d",1);
+g.addEdge("c", "e",5);
+g.addEdge("a", "f",7);
+g.addEdge("b", "e",6);
+g.addEdge("e", "g",4);
 
 g.showGraph();
 
-//console.log(g.visited);
-g.clearVisitedList();
+
+//g.clearVisitedList();
 g.dfs("a");
 console.log("-----");
 g.clearVisitedList();
-//g.dfs(0);
 g.bfs("a");
-console.log(g.edgeTo);
-
-console.log(g.pathTo("e"));
+//console.log(g.edgeTo);
+//
+//console.log(g.pathTo("e"));
 
 module.exports = Graph;
