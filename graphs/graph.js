@@ -129,9 +129,7 @@ function dijkstra(dest, target) {
 
   for (var key in this.adj) {
     dList[key] = Infinity;
-    paths[key] = {
-      path: []
-    };
+    paths[key] = []
   }
 
   console.log(paths);
@@ -144,7 +142,7 @@ function dijkstra(dest, target) {
       vCounter++;
       if (dList[s] == Infinity) {
         dList[s] = 0;
-        paths[s].path.push(s);
+        paths[s].push(s);
       }
       this.visited[s] = true
     }
@@ -154,8 +152,8 @@ function dijkstra(dest, target) {
       var totalCost = dList[s] + this.adj[s][i].cost;
       console.log("total Cost", this.adj[s][i].to, totalCost);
       if (totalCost < dList[this.adj[s][i].to]) {
-        paths[this.adj[s][i].to].path = paths[s].path.slice();
-        paths[this.adj[s][i].to].path.push(this.adj[s][i].to);
+        paths[this.adj[s][i].to] = paths[s].slice();
+        paths[this.adj[s][i].to].push(this.adj[s][i].to);
         dList[this.adj[s][i].to] = dList[s] + this.adj[s][i].cost;
         tempList = dList;
       }
