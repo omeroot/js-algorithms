@@ -22,3 +22,4 @@
 - [Sets](https://github.com/omeroot/js-algorithms/tree/master/sets)
 - [Binary Tree](https://github.com/omeroot/js-algorithms/tree/master/binary%20tree)
 - [Directed Graphs](https://github.com/omeroot/js-algorithms/tree/master/graphs)
+- [Sort Algorithms](https://github.com/omeroot/js-algorithms/tree/master/sorting)
