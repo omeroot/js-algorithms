@@ -1,6 +1,6 @@
 {
-  "name": "flack",
-  "description": "flexible blacklist",
+  "name": "js-algorithms",
+  "description": "algorithms for javascript",
   "keywords": [
     "javascript",
     "algorithm",
@@ -16,13 +16,12 @@
   ],
   "author": "Ömer Demircan <demircanomer91@gmail.com>",
   "scripts": {
-    "build": "uglifyjs flack.js --mangle --source-map flack.min.js.map -o flack.min.js",
     "test": "lab test"
   },
-  "main": "flack.js",
+  "main": "app.js",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/erayarslan/flack"
+    "url": "https://github.com/omeroot/js-algorithms"
   }
 }
