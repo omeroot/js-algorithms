@@ -13,8 +13,6 @@
  *
  * */
 
-var Edge = require('./edge.js');
-
 function Graph(v) {
   this.adj = {};
   this.visited = {};
