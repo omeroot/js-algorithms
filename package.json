@@ -1,0 +1,28 @@
+{
+  "name": "flack",
+  "description": "flexible blacklist",
+  "keywords": [
+    "javascript",
+    "algorithm",
+    "function",
+    "library",
+    "sorting",
+    "binary tree",
+    "linked list",
+    "hashing",
+    "graphs",
+    "sets",
+    "data structure"
+  ],
+  "author": "Ömer Demircan <demircanomer91@gmail.com>",
+  "scripts": {
+    "build": "uglifyjs flack.js --mangle --source-map flack.min.js.map -o flack.min.js",
+    "test": "lab test"
+  },
+  "main": "flack.js",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/erayarslan/flack"
+  }
+}

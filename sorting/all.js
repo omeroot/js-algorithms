@@ -14,18 +14,10 @@ function Sorting() {
   this.swap = swap;
   this.bubbleSort = bubbleSort;
   this.selectionSorting = selectionSorting;
-  this.WTFinsertionSort = WTFinsertionSort;
   this.shellSort = shellSort;
   this.insertionSort = insertionSort;
+  this.mergeSort = mergeSort;
 }
-
-//Array.prototype.bubbleSort = function (callback) {
-//  var res = [];
-//  for (var i = 0; i < this.length - 1; i++) {
-//    res.push(callback(this[i], i, this));
-//  }
-//  return res;
-//};
 
 function CArray(size) {
   for (var i = 0; i < size; i++) {
@@ -64,26 +56,6 @@ function selectionSorting(arr) {
   return arr;
 }
 
-function WTFinsertionSort(arr){
-  var res = [];
-  res.push(arr[0]);
-  console.log(res);
-  for(var i = 1 ;i < arr.length ; i++){
-    res.push(arr[i]);
-    for(var j = 0 ; j< res.length - 1  ; j++){
-      if(arr[i] < res[j]){
-        console.log("before",res);
-        console.log("index(i):",i,"index(j):",j," change");
-        this.swap(res, i, j);
-        console.log("after",res);
-        console.log("-------");
-      }
-    }
-  }
-
-  return res;
-}
-
 function insertionSort(arr){
   for(var i = 0 ; i< arr.length ; i++){
     var temp = arr[i];
@@ -98,25 +70,37 @@ function insertionSort(arr){
 }
 
 function shellSort(arr){
+  var step = arr.length / 2;
 
+  while(step > 0) {
+    for (var i = step; i < arr.length; i++) {
+      var k = arr[i];
+      for(var j = i ; j>=step && k < arr[j - step] ; j -= step){
+        arr[j] = arr[j-step];
+      }
+      arr[j] = k;
+    }
+    step = parseInt(step / 2);
+  }
+
+  return arr;
+}
+
+function mergeSort(arr){
+  /////
 }
 
 
 var s = new Sorting();
-var arr = s.CArray(10).data;
+var arr = s.CArray(11).data;
 
-//console.log(s.bubbleSort(function(a, b ){
-//  return a < b;
-//}).data);
-//console.log(s.selectionSorting(arr));
-//var arr = [64,32,85,24,13];
+
 console.log(arr);
+//console.log(s.selectionSorting(arr));
 //console.log(s.WTFinsertionSort(arr));
-console.log(s.insertionSort(arr));
+//console.log(s.insertionSort(arr));
+//console.log(s.shellSort(arr));
 
-//var x = arr.bubbleSort(function (item, index, array) {
-//  return array[index] > array[index + 1];
-//});
-//console.log(x);
+
 
 module.exports = Sorting;
