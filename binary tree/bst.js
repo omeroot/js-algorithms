@@ -36,7 +36,7 @@ function BST() {
   this.removeNode = removeNode;
 }
 
-function insert(data) {
+function insert(data, callback) {
   var node = new Node(data, null, null);
   if (this.root == null) {
     this.root = node;
@@ -44,7 +44,7 @@ function insert(data) {
     var curr = this.root;
 
     while (true) {
-      if (curr.data > node.data) {
+      if (callback(curr.data, node.data)) {
         if (curr.left == null) {
           curr.left = node;
           break;
@@ -89,12 +89,12 @@ function getMax() {
   return max;
 }
 
-function find(item) {
+function find(item,callback) {
   var curr = this.root;
   var parent;
-  while (curr.data != item) {
+  while (callback(curr.data) != item) {
     parent = curr;
-    if (curr.data > item) {
+    if (callback(curr.data) > item) {
       curr = curr.left;
     } else {
       curr = curr.right;
@@ -186,13 +186,27 @@ function postOrder(node) {
 
 var bst = new BST();
 
-bst.insert(23);
-bst.insert(45);
-bst.insert(16);
-bst.insert(37);
-bst.insert(3);
-bst.insert(99);
-bst.insert(22);
+bst.insert({x: 4},function(a,b){
+  return a.x > b.x;
+});
+bst.insert({x: 44},function(a,b){
+  return a.x > b.x;
+});
+bst.insert({x: 5},function(a,b){
+  return a.x > b.x;
+});
+bst.insert({x: 23},function(a,b){
+  return a.x > b.x;
+});
+bst.insert({x: 1},function(a,b){
+  return a.x > b.x;
+});
+bst.insert({x: 2},function(a,b){
+  return a.x > b.x;
+});
+bst.insert({x: 32},function(a,b){
+  return a.x > b.x;
+});
 
 bst.inOrder(bst.root);
 process.stdout.write("\n");
@@ -206,7 +220,9 @@ process.stdout.write("\n");
 console.log("min ", bst.getMin());
 console.log("max ", bst.getMax());
 
-console.log("find", bst.find(37).parent);
+console.log("find", bst.find(23,function(a){
+  return a.x;
+}));
 
 bst.remove(45);
 bst.inOrder(bst.root);

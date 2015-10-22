@@ -150,7 +150,10 @@ function quickSort(arr) {
       right.push(arr[i]);
     }
   }
-  return quickSort(left).concat(pivot, quickSort(right));
+  console.log(left,right);
+  var x =  quickSort(left).concat(pivot, quickSort(right));
+  console.log("x",x);
+  return x;
 }
 
 
