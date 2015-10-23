@@ -17,7 +17,7 @@
 ##Binary Search Tree
 
   ```js 
-  var bst = new BinarySearchTree();
+  var bst = new js_algorithms.BinarySearchTree();
   
   bst.insert({x: 4}, function (a, b) {
     return a.x > b.x;
@@ -39,7 +39,7 @@
 ##Doubly Linked List
   
   ```js
-  var list = new DoublyLinkedList();
+  var list = new js_algorithms.DoublyLinkedList();
   
   list.insert({name:"omer",surname:"demircan"});
   
@@ -55,7 +55,7 @@
 ##Hash
 
   ```js
-  var hash = new Hash({size: 137});
+  var hash = new js_algorithms.Hash({size: 137});
   
   hash.put({name: "omer"});
   
@@ -65,7 +65,7 @@
 ##Linked List
 
   ```js
-  var llist = new LinkedList();
+  var llist = new js_algorithms.LinkedList();
   
   llist.insert({name: "omer"});
   
@@ -81,7 +81,7 @@
 ##Graphs
 
   ```js
-  var g = new Graph(7);
+  var g = new js_algorithms.Graph(7);
   
   g.addEdge("a", "b", 3);
   g.addEdge("a", "c", 5);
@@ -93,8 +93,8 @@
 ##Sort Algorithms
 
   ```js
-  var s = new Sorting();
-  var arr = s.CArray(11).data;
+  var s = new js_algorithms.Sorting();
+  var arr = s.CreateRandomArray(11).data;
   
   s.selectionSorting(arr);
   
