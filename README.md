@@ -15,6 +15,7 @@
                                                                      
                                                                      
 ##Binary Search Tree
+
     ```js
     var bst = new BST();
     
@@ -34,6 +35,7 @@
       return a.x == 23;
     });
     ```
+    
 ##Doubly Linked List
   
   ```js
