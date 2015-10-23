@@ -1,5 +1,5 @@
 {
-  "name": "js-algorithms",
+  "name": "javascript-algorithms",
   "description": "algorithms for javascript",
   "keywords": [
     "javascript",
@@ -16,9 +16,10 @@
   ],
   "author": "Ömer Demircan <demircanomer91@gmail.com>",
   "scripts": {
+    "build": "uglifyjs js-algorithm.js --mangle --source-map js-algorithm.min.js.map -o js-algorithm.min.js",
     "test": "lab test"
   },
-  "main": "app.js",
+  "main": "js-algorithm.js",
   "version": "0.0.1",
   "repository": {
     "type": "git",
