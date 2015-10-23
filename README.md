@@ -81,7 +81,7 @@
 ##Graphs
 
   ```js
-  var g = new js_algorithms.Graph(7);
+  var g = new js_algorithms.Graph(GRAPH_SIZE);
   
   g.addEdge("a", "b", 3);
   g.addEdge("a", "c", 5);
