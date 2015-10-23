@@ -17,23 +17,23 @@
 ##Binary Search Tree
 
   ```js 
-    var bst = new BST();
-    
-    bst.insert({x: 4}, function (a, b) {
-      return a.x > b.x;
-    });
-    
-    bst.getMax();
-    
-    bst.getMin();
-    
-    bst.find(23, function (a) {
-      return a.x;
-    });
-    
-    bst.remove(function(a){
-      return a.x == 23;
-    });
+  var bst = new BST();
+  
+  bst.insert({x: 4}, function (a, b) {
+    return a.x > b.x;
+  });
+  
+  bst.getMax();
+  
+  bst.getMin();
+  
+  bst.find(23, function (a) {
+    return a.x;
+  });
+  
+  bst.remove(function(a){
+    return a.x == 23;
+  });
   ```
     
 ##Doubly Linked List
