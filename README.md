@@ -16,7 +16,7 @@
                                                                      
 ##Binary Search Tree
 
-    ```js 
+  ```js 
     var bst = new BST();
     
     bst.insert({x: 4}, function (a, b) {
@@ -34,7 +34,7 @@
     bst.remove(function(a){
       return a.x == 23;
     });
-    ```
+  ```
     
 ##Doubly Linked List
   
