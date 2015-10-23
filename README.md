@@ -17,7 +17,7 @@
 ##Binary Search Tree
 
   ```js 
-  var bst = new BST();
+  var bst = new BinarySearchTree();
   
   bst.insert({x: 4}, function (a, b) {
     return a.x > b.x;
@@ -39,7 +39,7 @@
 ##Doubly Linked List
   
   ```js
-  var list = new DLinkedList();
+  var list = new DoublyLinkedList();
   
   list.insert({name:"omer",surname:"demircan"});
   
@@ -55,7 +55,7 @@
 ##Hash
 
   ```js
-  var hash = new HashTable({size: 137});
+  var hash = new Hash({size: 137});
   
   hash.put({name: "omer"});
   
