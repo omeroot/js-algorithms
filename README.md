@@ -3,20 +3,20 @@
                                                                                 
                          _______                                                
                          __  __ \______ ________________                        
-                         _  / / /_  __ `__ \  _ \_  ___/                        
+                         _  / / /_  __  __ \  _ \_  ___/                        
                          / /_/ /_  / / / / /  __/  /                            
                          \____/ /_/ /_/ /_/\___//_/                             
                                                                                 
             ________                _____                                       
             ___  __ \___________ ______(_)__________________ _______            
-            __  / / /  _ \_  __ `__ \_  /__  ___/  ___/  __ `/_  __ \           
+            __  / / /  _ \_  __  __ \_  /__  ___/  ___/  __  /_  __ \           
             _  /_/ //  __/  / / / / /  / _  /   / /__ / /_/ /_  / / /           
             /_____/ \___//_/ /_/ /_//_/  /_/    \___/ \__,_/ /_/ /_/            
                                                                      
                                                                      
 ##Binary Search Tree
 
-    ```js
+    ```js 
     var bst = new BST();
     
     bst.insert({x: 4}, function (a, b) {
@@ -53,6 +53,7 @@
   ```
   
 ##Hash
+
   ```js
   var hash = new HashTable({size: 137});
   
@@ -60,7 +61,9 @@
   
   hash.get({name: "omer"})
   ```
+  
 ##Linked List
+
   ```js
   var llist = new LinkedList();
   
@@ -75,8 +78,8 @@
   });
   ```
   
-
 ##Graphs
+
   ```js
   var g = new Graph(7);
   
@@ -86,7 +89,9 @@
   
   var p = g.dijkstra("a","e"); //Output : [a,b,e]
   ```
+  
 ##Sort Algorithms
+
   ```js
   var s = new Sorting();
   var arr = s.CArray(11).data;
