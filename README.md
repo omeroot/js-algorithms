@@ -14,9 +14,21 @@
             /_____/ \___//_/ /_/ /_//_/  /_/    \___/ \__,_/ /_/ /_/            
                                                                      
                                                                      
-- [Linked List]
-- [Doubly Linked List]
-- [Hash]
-- [Binary Tree]
-- [Directed Graphs]
-- [Sort Algorithms]
+##Linked List
+      var bst = new BST();
+      bst.insert({x: 4}, function (a, b) {
+            return a.x > b.x;
+      });
+      bst.getMax();
+      bst.getMin();
+      bst.find(23, function (a) {
+            return a.x;
+      });
+      bst.remove(function(a){
+        return a.x == 23;
+      });
+##Doubly Linked List
+##Hash
+##Binary Tree
+##Directed Graphs
+##Sort Algorithms
