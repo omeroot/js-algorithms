@@ -88,6 +88,12 @@
   g.addEdge("b", "e", 1);
   
   var p = g.dijkstra("a","e"); //Output : [a,b,e]
+  
+  g.clearVisitedList();
+  var g.depthFirstSearch(START_NODE);
+  
+  g.clearVisitedList();//clear before visited list (set to false all of them)
+  var g.breadthFirstSearch(START_NODE);
   ```
   
 ##Sort Algorithms
