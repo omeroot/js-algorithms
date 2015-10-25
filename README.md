@@ -104,17 +104,29 @@
 
   ```js
   var s = new js_algorithms.Sorting();
-  var arr = s.CreateRandomArray(11).data;
   
-  s.selectionSorting(arr);
+  //select any arr variable
+  var arr = s.CreateRandomArray(11).data; //[,4,6,7,3,66,3]
+  var arr = [{x:4,y:6},{x:2,y:7},{x:66,y:3},{x:14,y:0},{x:6,y:5},{x:2,y:5}];
   
-  s.WTFinsertionSort(arr);
+  s.selectionSorting(arr, function(a, b){
+    return a.x < b.x;
+  });
   
-  s.insertionSort(arr);
+  s.insertionSort(arr, function(a, b){
+    return a.x < b.x;
+  });
   
-  s.shellSort(arr);
+  s.shellSort(arr, function(a, b){
+    return a.x < b.x;
+  });
   
-  s.mergeSort(arr);
+  //only mergeSort callback is different from other 
+  s.mergeSort(arr, function(a){
+    return a.x;
+  });
   
-  s.quickSort(arr);
+  s.quickSort(arr, function(a, b){
+    return a.x < b.x
+  });
   ```
