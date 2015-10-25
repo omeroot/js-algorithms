@@ -35,20 +35,20 @@ function swap(array, index1, index2) {
 
 //one of the slowest sorting algorithms but easiest
 function bubbleSort(arr, callback) {
-  for (var i = 0; i < arr.length - 2; i++) {
-    for (var j = 0; j < arr.length - 1; j++) {
-      if (callback(arr[j], arr[j + 1])) {
-        this.swap(arr, j, j + 1);
+  for(var i = arr.length ; i>=2 ; --i){
+    for(var j = 0 ; j< i -1 ; ++j){
+      if(callback(arr[j], arr[j+1])){
+        this.swap(arr, j, j+1);
       }
     }
   }
   return arr;
 }
 
-function selectionSorting(arr) {
+function selectionSorting(arr, callback) {
   for (var i = 0; i < arr.length - 1; i++) {
     for (var j = i + 1; j < arr.length; j++) {
-      if (arr[i] > arr[j]) {
+      if (callback(arr[i], arr[j])) {
         this.swap(arr, i, j);
       }
     }
@@ -57,11 +57,11 @@ function selectionSorting(arr) {
   return arr;
 }
 
-function insertionSort(arr) {
+function insertionSort(arr, callback) {
   for (var i = 0; i < arr.length; i++) {
     var temp = arr[i];
     var j = i;
-    while (j > 0 && (arr[j - 1] > temp)) {
+    while (j > 0 && callback(arr[j-1], temp)) {
       arr[j] = arr[j - 1];
       j = j - 1;
     }
@@ -70,13 +70,13 @@ function insertionSort(arr) {
   return arr;
 }
 
-function shellSort(arr) {
-  var step = arr.length / 2;
+function shellSort(arr, callback) {
+  var step = parseInt(arr.length / 2);
 
   while (step > 0) {
     for (var i = step; i < arr.length; i++) {
       var k = arr[i];
-      for (var j = i; j >= step && k < arr[j - step]; j -= step) {
+      for (var j = i; j >= step && callback(k, arr[j - step]); j -= step) {
         arr[j] = arr[j - step];
       }
       arr[j] = k;
@@ -87,42 +87,59 @@ function shellSort(arr) {
   return arr;
 }
 
-function mergeSort(arr) {
+function mergeSort(arr, callback) {
   var step = 1;
   var left, right;
+
+  var controller = new Object();
+  controller.callback = callback;
+  controller.check = function(val){
+    console.log("will check",val);
+    var temp = {};
+    if(val === Infinity){
+      temp.x = Infinity
+      return temp;
+    }
+    else
+      return val;
+  }
 
   while (step < arr.length) {
     left = 0;
     right = step;
     while (right + step <= arr.length) {
-      mergeArray(arr, left, left + step, right, right + step);
+      mergeArray(arr, left, left + step, right, right + step, controller);
       left = right + step;
       right = left + step;
     }
     if (right < arr.length) {
-      mergeArray(arr, left, left + step, right, arr.length);
+      mergeArray(arr, left, left + step, right, arr.length, controller);
     }
     step *= 2;
   }
 
-  function mergeArray(arr, startleft, stopleft, startright, stopright) {
+  function mergeArray(arr, startleft, stopleft, startright, stopright, controller) {
     var leftArr = new Array(stopleft - startleft + 1);
     var rightArr = new Array(stopright - startright + 1);
 
-    for (var i = 0; i < (leftArr.length); i++) {
-      leftArr[i] = arr[startleft + i];
-    }
-
-    for (var i = 0; i < (rightArr.length) - 1; i++) {
-      rightArr[i] = arr[startright + i];
+    x = startleft;
+    for (var i = 0; i < (leftArr.length - 1) ; ++i) {
+      leftArr[i] = arr[x];
+      ++x;
+    } 
+    x = startright;
+    for (var i = 0; i < (rightArr.length - 1) ; ++i) {
+      rightArr[i] = arr[x];
+      ++x;
     }
 
     leftArr[leftArr.length - 1] = Infinity;
     rightArr[rightArr.length - 1] = Infinity;
     var m = 0;
     var n = 0;
-    for (var k = startleft; k < stopright; k++) {
-      if (leftArr[m] <= rightArr[n]) {
+    for (var k = startleft; k < stopright; ++k) {
+      //console.log(leftArr,rightArr,m,n);
+      if (controller.callback(controller.check(leftArr[m]), controller.check(rightArr[n]))) {
         arr[k] = leftArr[m];
         m++;
       }
@@ -136,7 +153,7 @@ function mergeSort(arr) {
   return arr;
 }
 
-function quickSort(arr) {
+function quickSort(arr, callback) {
   if(arr.length == 0){
     return [];
   }
@@ -144,29 +161,31 @@ function quickSort(arr) {
   var right = [];
   var pivot = arr[0];
   for(var i = 1 ; i< arr.length ; i++){
-    if(arr[i] < pivot){
+    if(callback(arr[i], pivot)){
       left.push(arr[i]);
     }else{
       right.push(arr[i]);
     }
   }
-  console.log(left,right);
-  var x =  quickSort(left).concat(pivot, quickSort(right));
-  console.log("x",x);
+  var x =  quickSort(left, callback).concat(pivot, quickSort(right, callback));
+
   return x;
 }
 
 
 var s = new Sorting();
-var arr = s.CArray(11).data;
-
+//var arr = s.CArray(11).data;
+arr = [{x:4,y:6},{x:2,y:7},{x:66,y:3},{x:14,y:0},{x:6,y:5}];
 
 console.log(arr);
+console.log("result",s.mergeSort(arr,function(a,b){
+  return a.x > b.x;
+}));
 //console.log(s.selectionSorting(arr));
-//console.log(s.WTFinsertionSort(arr));
+//console.log(s.WTFinsertionSort(arr));Ş
 //console.log(s.insertionSort(arr));
-//console.log(s.shellSort(arr));
-//console.log(s.mergeSort(arr));
-console.log(s.quickSort(arr));
+//console.log(s.shellSort(arr)); 
+//console.log(s.mergeSort(arr)); --
+//console.log(s.quickSort(arr)); 
 
 module.exports = Sorting;

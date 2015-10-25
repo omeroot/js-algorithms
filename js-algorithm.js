@@ -439,8 +439,8 @@
 
 //one of the slowest sorting algorithms but easiest
   function bubbleSort(arr, callback) {
-    for (var i = 0; i < arr.length - 2; i++) {
-      for (var j = 0; j < arr.length - 1; j++) {
+    for (var i = arr.length; i >= 2; --i) {
+      for (var j = 0; j < i - 1; ++j) {
         if (callback(arr[j], arr[j + 1])) {
           this.swap(arr, j, j + 1);
         }
@@ -449,10 +449,10 @@
     return arr;
   }
 
-  function selectionSorting(arr) {
+  function selectionSorting(arr, callback) {
     for (var i = 0; i < arr.length - 1; i++) {
       for (var j = i + 1; j < arr.length; j++) {
-        if (arr[i] > arr[j]) {
+        if (callback(arr[i], arr[j])) {
           this.swap(arr, i, j);
         }
       }
@@ -461,11 +461,11 @@
     return arr;
   }
 
-  function insertionSort(arr) {
+  function insertionSort(arr, callback) {
     for (var i = 0; i < arr.length; i++) {
       var temp = arr[i];
       var j = i;
-      while (j > 0 && (arr[j - 1] > temp)) {
+      while (j > 0 && callback(arr[j - 1], temp)) {
         arr[j] = arr[j - 1];
         j = j - 1;
       }
@@ -474,13 +474,13 @@
     return arr;
   }
 
-  function shellSort(arr) {
-    var step = arr.length / 2;
+  function shellSort(arr, callback) {
+    var step = parseInt(arr.length / 2);
 
     while (step > 0) {
       for (var i = step; i < arr.length; i++) {
         var k = arr[i];
-        for (var j = i; j >= step && k < arr[j - step]; j -= step) {
+        for (var j = i; j >= step && callback(k, arr[j - step]); j -= step) {
           arr[j] = arr[j - step];
         }
         arr[j] = k;
@@ -540,7 +540,7 @@
     return arr;
   }
 
-  function quickSort(arr) {
+  function quickSort(arr, callback) {
     if (arr.length == 0) {
       return [];
     }
@@ -548,14 +548,15 @@
     var right = [];
     var pivot = arr[0];
     for (var i = 1; i < arr.length; i++) {
-      if (arr[i] < pivot) {
+      if (callback(arr[i], pivot)) {
         left.push(arr[i]);
       } else {
         right.push(arr[i]);
       }
     }
+    var x = quickSort(left, callback).concat(pivot, quickSort(right, callback));
 
-    return quickSort(left).concat(pivot, quickSort(right));
+    return x;
   }
 
 
