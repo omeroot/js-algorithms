@@ -491,42 +491,50 @@
     return arr;
   }
 
-  function mergeSort(arr) {
+  function mergeSort(arr, callback) {
     var step = 1;
     var left, right;
-
     while (step < arr.length) {
       left = 0;
       right = step;
       while (right + step <= arr.length) {
-        mergeArray(arr, left, left + step, right, right + step);
+        mergeArray(arr, left, left + step, right, right + step, callback);
         left = right + step;
         right = left + step;
       }
       if (right < arr.length) {
-        mergeArray(arr, left, left + step, right, arr.length);
+        mergeArray(arr, left, left + step, right, arr.length, callback);
       }
       step *= 2;
     }
 
-    function mergeArray(arr, startleft, stopleft, startright, stopright) {
+    function mergeArray(arr, startleft, stopleft, startright, stopright, callback) {
       var leftArr = new Array(stopleft - startleft + 1);
       var rightArr = new Array(stopright - startright + 1);
 
-      for (var i = 0; i < (leftArr.length); i++) {
-        leftArr[i] = arr[startleft + i];
+      x = startleft;
+      for (var i = 0; i < (leftArr.length - 1); ++i) {
+        leftArr[i] = arr[x];
+        ++x;
       }
-
-      for (var i = 0; i < (rightArr.length) - 1; i++) {
-        rightArr[i] = arr[startright + i];
+      x = startright;
+      for (var i = 0; i < (rightArr.length - 1); ++i) {
+        rightArr[i] = arr[x];
+        ++x;
       }
 
       leftArr[leftArr.length - 1] = Infinity;
       rightArr[rightArr.length - 1] = Infinity;
       var m = 0;
       var n = 0;
-      for (var k = startleft; k < stopright; k++) {
-        if (leftArr[m] <= rightArr[n]) {
+      var l;
+      var r;
+      for (var k = startleft; k < stopright; ++k) {
+        //console.log(leftArr,rightArr[n],m,n);
+        //l =( (leftArr[m] == Infinity) ? Infinity : callback(leftArr[m]) );
+        //r =( (rightArr[n] == Infinity) ? Infinity : callback(rightArr[n]) );
+        if (( (leftArr[m] == Infinity) ? Infinity : callback(leftArr[m]) )
+          <= ( (rightArr[n] == Infinity) ? Infinity : callback(rightArr[n]) )) {
           arr[k] = leftArr[m];
           m++;
         }
@@ -539,6 +547,7 @@
 
     return arr;
   }
+
 
   function quickSort(arr, callback) {
     if (arr.length == 0) {

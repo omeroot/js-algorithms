@@ -90,35 +90,21 @@ function shellSort(arr, callback) {
 function mergeSort(arr, callback) {
   var step = 1;
   var left, right;
-
-  var controller = new Object();
-  controller.callback = callback;
-  controller.check = function(val){
-    console.log("will check",val);
-    var temp = {};
-    if(val === Infinity){
-      temp.x = Infinity
-      return temp;
-    }
-    else
-      return val;
-  }
-
   while (step < arr.length) {
     left = 0;
     right = step;
     while (right + step <= arr.length) {
-      mergeArray(arr, left, left + step, right, right + step, controller);
+      mergeArray(arr, left, left + step, right, right + step, callback);
       left = right + step;
       right = left + step;
     }
     if (right < arr.length) {
-      mergeArray(arr, left, left + step, right, arr.length, controller);
+      mergeArray(arr, left, left + step, right, arr.length, callback);
     }
     step *= 2;
   }
 
-  function mergeArray(arr, startleft, stopleft, startright, stopright, controller) {
+  function mergeArray(arr, startleft, stopleft, startright, stopright, callback) {
     var leftArr = new Array(stopleft - startleft + 1);
     var rightArr = new Array(stopright - startright + 1);
 
@@ -137,9 +123,14 @@ function mergeSort(arr, callback) {
     rightArr[rightArr.length - 1] = Infinity;
     var m = 0;
     var n = 0;
+    var l;
+    var r;
     for (var k = startleft; k < stopright; ++k) {
-      //console.log(leftArr,rightArr,m,n);
-      if (controller.callback(controller.check(leftArr[m]), controller.check(rightArr[n]))) {
+      //console.log(leftArr,rightArr[n],m,n);
+      //l =( (leftArr[m] == Infinity) ? Infinity : callback(leftArr[m]) );
+      //r =( (rightArr[n] == Infinity) ? Infinity : callback(rightArr[n]) );
+      if ( ( (leftArr[m] == Infinity) ? Infinity : callback(leftArr[m]) ) 
+        <= ( (rightArr[n] == Infinity) ? Infinity : callback(rightArr[n]) ) ) {
         arr[k] = leftArr[m];
         m++;
       }
@@ -175,17 +166,17 @@ function quickSort(arr, callback) {
 
 var s = new Sorting();
 //var arr = s.CArray(11).data;
-arr = [{x:4,y:6},{x:2,y:7},{x:66,y:3},{x:14,y:0},{x:6,y:5}];
+arr = [{x:4,y:6},{x:2,y:7},{x:66,y:3},{x:14,y:0},{x:6,y:5},{x:2,y:5}];
 
 console.log(arr);
-console.log("result",s.mergeSort(arr,function(a,b){
-  return a.x > b.x;
+console.log("result",s.mergeSort(arr,function(a){
+  return a.x;
 }));
 //console.log(s.selectionSorting(arr));
 //console.log(s.WTFinsertionSort(arr));Ş
 //console.log(s.insertionSort(arr));
 //console.log(s.shellSort(arr)); 
-//console.log(s.mergeSort(arr)); --
+//console.log(s.mergeSort(arr)); 
 //console.log(s.quickSort(arr)); 
 
 module.exports = Sorting;
