@@ -38,6 +38,12 @@
   bst.remove(function(a){
     return a.x == 23;
   });
+  
+  bst.displayInOrder([starting node]); //example bst.root; this work only node.js
+  
+  bst.displayPreOrder([starting node]); //example bst.root; this work only node.js
+  
+  bst.displayPostOrder([starting node]); //example bst.root; this work only node.js
   ```
     
 ##Doubly Linked List
