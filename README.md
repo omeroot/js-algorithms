@@ -24,7 +24,7 @@
   var bst = new js_algorithms.BinarySearchTree();
   
   bst.insert({x: 4}, function (a, b) {
-    return a.x > b.x;
+    return a.x < b.x;//this work only with <,,you determine which element if data is object
   });
   
   bst.getMax();
