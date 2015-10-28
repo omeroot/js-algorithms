@@ -139,15 +139,15 @@
       //node has two child
       var tempNode = getSmallest(node.right);
       node.data = tempNode.data;
-      node.right = removeNode(node.right, tempNode.data);
+      node.right = removeNodeOnBinarySearch(node.right, tempNode.data);
 
       return node;
     } else if (data < node.data) {
-      node.left = removeNode(node.left, data);
+      node.left = removeNodeOnBinarySearch(node.left, data);
 
       return node;
     } else if (data > node.data) {
-      removeNode(node.right, data);
+      removeNodeOnBinarySearch(node.right, data);
 
       return node;
     }
@@ -163,24 +163,24 @@
 
   function displayInOrder(node) {
     if (!(node == null)) {
-      inOrder(node.left);
+      displayInOrder(node.left);
       process.stdout.write(node.get() + " ");
-      inOrder(node.right);
+      displayInOrder(node.right);
     }
   }
 
   function displayPreOrder(node) {
     if (!(node == null)) {
       process.stdout.write(node.get() + " ");
-      preOrder(node.left);
-      preOrder(node.right);
+      displayPreOrder(node.left);
+      displayPreOrder(node.right);
     }
   }
 
   function displayPostOrder(node) {
     if (!(node == null)) {
-      postOrder(node.left);
-      postOrder(node.right);
+      displayPostOrder(node.left);
+      displayPostOrder(node.right);
       process.stdout.write(node.get() + " ");
     }
   }
@@ -259,7 +259,7 @@
     }
     for (var i = 0; i < this.adj[v].length; i++) {
       if (this.visited[this.adj[v][i].to] == false) {
-        this.dfs(this.adj[v][i].to);
+        this.depthFirstSearch(this.adj[v][i].to);
       }
     }
   }
@@ -351,6 +351,12 @@
 
     return paths[target];
   }
+
+  /**
+  *
+  * LINKED LIST
+  *
+  */
 
   function LinkedList() {
     this.baseNode = {

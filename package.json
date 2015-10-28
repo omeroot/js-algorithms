@@ -16,11 +16,11 @@
   ],
   "author": "Ömer Demircan <demircanomer91@gmail.com>",
   "scripts": {
-    "build": "uglifyjs js-algorithm.js --mangle --source-map js-algorithm.min.js.map -o js-algorithm.min.js",
-    "test": "lab test"
+    "build": "uglifyjs js-algorithm.js --mangle --source-map js-algorithm.min.js.map -o js-algorithm.min.js"
   },
+  "licence": "MIT",
   "main": "js-algorithm.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/omeroot/js-algorithms"
