@@ -130,3 +130,9 @@
     return a.x < b.x
   });
   ```
+  
+##Huffman
+  ```js
+  var huffman = new js_algorithms.Huffman("omer demircan");
+  huffman.encode();//returned : 1011101100...
+  ```
