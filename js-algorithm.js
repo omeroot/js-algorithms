@@ -329,7 +329,7 @@
         }
         this.visited[s] = true
       }
-      
+
       for (var i = 0; i < this.adj[s].length; i++) {
         queue.push(this.adj[s][i].to);
         var totalCost = dList[s] + this.adj[s][i].cost;
@@ -351,10 +351,10 @@
   }
 
   /**
-  *
-  * LINKED LIST
-  *
-  */
+   *
+   * LINKED LIST
+   *
+   */
 
   function LinkedList() {
     this.baseNode = {
@@ -466,7 +466,7 @@
   }
 
   function insertionSort(arr, callback) {
-    for (var i = 0; i < arr.length; i++) {
+    for (var i = 1; i < arr.length; i++) {
       var temp = arr[i];
       var j = i;
       while (j > 0 && callback(arr[j - 1], temp)) {
@@ -749,113 +749,115 @@
   }
 
   /**
-  *
-  * HUFFMAN
-  *
-  */
+   *
+   * HUFFMAN
+   *
+   */
 
-function Huffman(text){
-  this.text = text;
-  this.coded = {};
-  this.node = {
-    right: null,
-    left: null,
-    freq: 0,
-    code:""
-  };
-  this.encode = encode;
-  this.createHuffmanTree = createHuffmanTree;
-  this.sortByFrequency = sortByFrequency;
-  this.createFrequencyHash = createFrequencyHash;
-  this.createBitMap = createBitMap;
-  this.buildHuffmanCode = buildHuffmanCode;
-}
-
-function encode(){
-  this.textArray = this.text.split("");
-  var sortedHash = sortByFrequency(this.createFrequencyHash());
-  var tree = this.createHuffmanTree(sortedHash);
-  
-  
-  this.createBitMap(tree);
-  return this.buildHuffmanCode();
-}
-
-function createHuffmanTree(elements){
-  if(elements.length == 1)
-    return elements[0];
-
-  var parent = JSON.parse(JSON.stringify(this.node));
-
-  parent.left = elements[0];
-  parent.right = elements[1];
-
-  parent.freq = parent.left.freq + parent.right.freq;
-
-  elements.splice(0,2);
-  elements.push(parent);
-
-  return this.createHuffmanTree(this.sortByFrequency(elements));
-}
-
-function sortByFrequency(hash){
-  for(var i = 1 ; i<hash.length ; i++){
-    var temp = hash[i];
-    var j = i;
-    while(j>0 && temp.freq <= hash[j-1].freq){
-      hash[j] = hash[j-1];
-      j--;
-    }
-    hash[j] = temp;
+  function Huffman(text) {
+    this.text = text;
+    this.coded = {};
+    this.node = {
+      right: null,
+      left: null,
+      freq: 0,
+      code: ""
+    };
+    this.encode = encode;
+    this.createHuffmanTree = createHuffmanTree;
+    this.sortByFrequency = sortByFrequency;
+    this.createFrequencyHash = createFrequencyHash;
+    this.createBitMap = createBitMap;
+    this.buildHuffmanCode = buildHuffmanCode;
   }
-  
-  return hash;
-}
 
-function createFrequencyHash(){
-  var freq = [];
-  var found = false;
-  var index;
-  
-  for(var i = 0 ;i < this.textArray.length ; i++){
-    for(var j = 0 ; j < freq.length ; j++){
-      if(freq[j].value == this.textArray[i]){
-        found = true;
-        index = j;
+  function encode() {
+    this.textArray = this.text.split("");
+    var sortedHash = sortByFrequency(this.createFrequencyHash());
+    var tree = this.createHuffmanTree(sortedHash);
+    this.createBitMap(tree);
+    return this.buildHuffmanCode();
+  }
+
+  function decode(code){
+
+  }
+
+  function createHuffmanTree(elements) {
+    if (elements.length == 1)
+      return elements[0];
+
+    var parent = JSON.parse(JSON.stringify(this.node));
+
+    parent.left = elements[0];
+    parent.right = elements[1];
+
+    parent.freq = parent.left.freq + parent.right.freq;
+
+    elements.splice(0, 2);
+    elements.push(parent);
+
+    return this.createHuffmanTree(this.sortByFrequency(elements));
+  }
+
+  function sortByFrequency(hash) {
+    for (var i = 1; i < hash.length; i++) {
+      var temp = hash[i];
+      var j = i;
+      while (j > 0 && temp.freq < hash[j - 1].freq) {
+        hash[j] = hash[j - 1];
+        j--;
+      }
+      hash[j] = temp;
+    }
+
+    return hash;
+  }
+
+  function createFrequencyHash() {
+    var freq = [];
+    var found = false;
+    var index;
+
+    for (var i = 0; i < this.textArray.length; i++) {
+      for (var j = 0; j < freq.length; j++) {
+        if (freq[j].value == this.textArray[i]) {
+          found = true;
+          index = j;
+        }
+      }
+      if (found) {
+        freq[index].freq += 1;
+        found = false;
+      } else {
+        freq.push({value: this.textArray[i], freq: 1});
       }
     }
-    if(found){
-      freq[index].freq += 1;
-      found = false;
-    } else{
-      freq.push({value: this.textArray[i], freq: 1});
-    }
-  }
-  
-  return freq;
-}
 
-function createBitMap(tree){
-   if(!(tree == null) && tree){
-    if(tree.left != null && (typeof tree.left !== 'undefined')){
-      tree.left.code = tree.code + "0";
-      this.coded[tree.left.value] = tree.left.code;
-    }
-    if(tree.right != null && (typeof tree.right !== 'undefined')){
-      tree.right.code = tree.code + "1";
-      this.coded[tree.right.value] = tree.right.code;
-    }
-    this.createBitMap(tree.left);
-    this.createBitMap(tree.right);
+    return freq;
   }
-}
 
-function buildHuffmanCode(){
-  for(var i = 0 ; i< this.textArray.length ; i++){
-    this.textArray[i] = this.coded[this.textArray[i]];
+  function createBitMap(tree) {
+    if (!(tree == null) && (typeof tree !== 'undefined')) {
+      if (tree.left != null && (typeof tree.left !== 'undefined')) {
+        tree.left.code = tree.code + "0";
+        this.coded[tree.left.value] = tree.left.code;
+      }
+      if (tree.right != null && (typeof tree.right !== 'undefined')) {
+        tree.right.code = tree.code + "1";
+        this.coded[tree.right.value] = tree.right.code;
+      }
+      this.createBitMap(tree.left);
+      this.createBitMap(tree.right);
+    }
   }
-  return this.textArray.join("");
-}
+
+  function buildHuffmanCode() {
+    for (var i = 0; i < this.textArray.length; i++) {
+      this.textArray[i] = this.coded[this.textArray[i]];
+    }
+    return this.textArray.join("");
+  }
 
 
   var full = {
